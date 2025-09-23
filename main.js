@@ -1,0 +1,25 @@
+const { app, BrowserWindow, ipcMain } = require('electron');
+
+app.on('ready', () => {
+    console.log('Aplicação iniciada');
+    let mainWindow = new BrowserWindow({
+        width: 800,
+        heigth:600
+    });
+     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
+
+});
+
+app.on('window-all-closed', () =>{
+    app.quit();
+});
+
+    ipcMain.on('abrir-janela-sobre', () => {
+        let sobreWindow = new BrowserWindow({
+            width:300,
+            height:200
+    });
+
+    sobreWindow.loadURL(`file://${__dirname}/app/sobre.html`);
+
+});
