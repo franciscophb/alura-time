@@ -1,18 +1,18 @@
-const {ipcRenderer, shell} =  require('electron');
-const process = require('process');
+const { ipcRenderer, shell } = require('electron');
+    const process = require('process');
 
 let linkFechar = document.querySelector("#link-fechar");
-let linkInstagram = document.querySelector("#link-Instagram");
-let versaoElectron = document.querySelector('#versão-electron');
+let linkTwitter = document.querySelector("#link-twitter");
+let versaoElectron = document.querySelector('#versao-electron');
 
 window.onload = function(){
-  versaoElectron.textContent = process.versions.electron;
+    versaoElectron.textContent = process.versions.electron;
 }
 
 linkFechar.addEventListener('click', function () {
     ipcRenderer.send('fechar-janela-sobre');
-});
+})
 
-linkInstagram.addEventListener('click', function () {
-    shell.openExternal("https://www.instagram.com/franciscoojuaraphb/");
-});
+linkTwitter.addEventListener('click', function () {
+    shell.openExternal("https://x.com/FranciscoOjuara");
+})
