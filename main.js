@@ -37,3 +37,10 @@ app.on('window-all-closed', () =>{
 ipcMain.on('fechar-janela-sobre', () => {
     sobreWindow.close();
 });
+ipcMain.on('teste',(event,teste) => {
+  console.log(`teste =  ${teste}` );
+});
+
+ipcMain.on('curso-parado',(event,curso, tempoEstudado) => {
+    console.log(`O curso ${curso} foi estudado por ${tempoEstudado }`);
+});

@@ -13,6 +13,8 @@
     "date-fns": "2.30.0",
     "dayjs": "^1.11.18",
     "electron": "^1.6.1",
+    "jsonfile": "^6.2.0",
+    "jsonfile-promised": "^0.0.1",
     "luxon": "^3.7.2",
     "moment": "^2.29.4"
   }
