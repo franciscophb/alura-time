@@ -38,5 +38,9 @@ module.exports = {
           }).catch((err)=>{
             console.log(err);
           });
+      },
+      pegaDados(curso){
+        let arquivoDoCurso = __dirname + '/data/'+ curso + '.json';
+        return jsonfile.readFile(arquivoDoCurso);
       }
   }
