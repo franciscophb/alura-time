@@ -39,3 +39,7 @@ botaoPlay.addEventListener('click', function (){
     botaoPlay.src = imgs[0];
 
 });
+
+ipcRenderer.on('curso-trocado', () => {
+    console.log('curso foi trocado');
+});
