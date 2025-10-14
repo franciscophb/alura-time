@@ -17,7 +17,7 @@ module.exports = {
               label: curso,
               type: 'radio',
               click: () => {
-                win.send('curso-trocado');
+                win.send('curso-trocado', curso);
                 console.log(curso);
               }
             };
