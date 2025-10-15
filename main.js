@@ -18,13 +18,7 @@ app.on('ready', () => {
 
 
 
-     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
-});
-
-app.on('window-all-closed', () =>{
-    app.quit();
-});
 
     let sobreWindow = null;
     ipcMain.on('abrir-janela-sobre', () => {
@@ -62,4 +56,43 @@ ipcMain.on('curso-adicionado', (event, novoCurso) => {
     let novoTemplate = templateGenerator.adicionaCursoNoTray(novoCurso, mainWindow);
     let novoTrayMenu = Menu.buildFromTemplate(novoTemplate);
     tray.setContextMenu(novoTrayMenu);
+});
+
+    let templateMenu =[{
+        label: 'Meu menu',
+          submenu: [
+              {
+              label:'Abrir opção de desenvolvimento >',
+              click: () => {
+                  mainWindow.webContents.openDevTools();
+                }
+              },
+              {
+                label:'Item 2'
+              }
+            ]
+          }];
+    if (process.plataform == 'darwin'){
+        templateMenu.unshifth({
+            label: app.getName(),
+            submenu:[
+              {
+                label:'O Mac é complicado'
+              }
+            ]
+        })
+    }
+
+
+    let menuPrincipal = Menu.buildFromTemplate(templateMenu);
+    Menu.setApplicationMenu(menuPrincipal);
+
+    //mainWindow.openDevTools();
+
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
+
+});
+
+app.on('window-all-closed', () =>{
+   app.quit();
 });
