@@ -51,6 +51,7 @@ botaoPlay.addEventListener('click', function (){
 });
 
 ipcRenderer.on('curso-trocado', (event, nomeCurso) => {
+    timer.parar(curso.textContent);
     data.pegaDados(nomeCurso)
       .then((dados) => {
           tempo.textContent = dados.tempo;
