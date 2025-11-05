@@ -1,5 +1,5 @@
 const data = require('./data');
-const { ipcMain} = require('electron');
+const { ipcMain, Menu} = require('electron');
 
 module.exports = {
   templateInicial:null,
@@ -42,54 +42,47 @@ module.exports = {
         })
         return this.templateInicial;
   },
-  geraMenuPrincipalTemplate(app){
-    let templateMenu = [{
-              label:'View',
-              submenu: [{
-                role:'reload'
+  geraMenuPrincipalTemplate(app,mainWindow){
+    let templateMenu = [
+              {label:'View',
+              submenu: [{role:'reload'},
+                        {role:'toggleDevTools'},
+                        {role:'close'}]
               },
-              {
-                role:'toggleDevTools'
+              {label:'Window',
+              submenu:[{role:'minimize'},
+                       {role:'maximize'},
+                        {role:'toggleDevTools'}]
               },
-              {
-              role:'close'
-              }]
-
+              {label: 'Sobre',
+                submenu: [{label: 'Sobre o Alura Timer >',
+                          click:() => {ipcMain.emit('abrir-janela-sobre');
+                        },accelerator: 'CommandOrControl+I'
               },
-              {
-                label:'Window',
-                submenu:[
-                  {
-                    role:'minimaize'
-                  },
-                  {
-                    role:'toggleTabBar'
+              {label: 'Abrir opção de desenvolvimento >',
+                  click: () => {
+                    mainWindow.openDevTools();
                   }
-                ]
-              },
-
+                },
               {
-                label: 'Sobre',
-                submenu: [
-              {
-                label: 'Sobre o Alura Timer >',
-                click:() => {
-                  ipcMain.emit('abrir-janela-sobre');
+                label: 'Alternar DevTools',
+                click: (menuItem, browserWindow) => {
+                  if (browserWindow) {
+                    const isOpen = browserWindow.webContents.isDevToolsOpened();
+                    if (isOpen) {
+                      browserWindow.webContents.closeDevTools();
+                    } else {
+                      browserWindow.webContents.openDevTools();
+                    }
+                  } else {
+                    console.log('Nenhuma janela ativa');
+                  }
                 }
-              },
-              {
-              label:'Abrir opção de desenvolvimento >',
-            //  click: () => {
-            //      mainWindow.webContents.openDevTools();
-            //    }
-              },
-              {
-                label:'Item 2'
               }
             ]
           }];
-    if (process.plataform == 'darwin'){
-        templateMenu.unshifth({
+    if (process.plataform === 'darwin'){
+        templateMenu.unshift({
             label: app.getName(),
             submenu:[
               {
