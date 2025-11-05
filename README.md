@@ -4,3 +4,4 @@ Estou usando o Atom para desenvolver, para executar, tendo instalado o Eletron,
 abra o terminal "abra com executar como adiministrador", na pasta \alura-time.
 Execute no terminal: 'npm start' e a aplicação começará.
 Obs.: ainda não está completo.
+para criar um executavel multiplataforma : npm install electron-packager -g
