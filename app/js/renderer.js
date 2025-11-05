@@ -60,6 +60,12 @@ ipcRenderer.on('curso-trocado', (event, nomeCurso) => {
 });
 
 botaoAdicionar.addEventListener('click', function(){
+
+    if (campoAdicionar.value ==''){
+      console.log('não posso adicionar um curso com nome vazio');
+      return;
+    }
+
     let novoCurso = campoAdicionar.value;
     curso.textContent = novoCurso;
     tempo.textContent = '00:00:00';
